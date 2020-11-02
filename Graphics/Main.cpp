@@ -5,10 +5,11 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include <learnopengl/shader_m.h>
 #include <learnopengl/camera.h>
-#include <learnopengl/model.h>
-
+#include "Render\MeshRenderer.h"
+#include "Render\Material.h"
+#include "Render\Transform.h"
+#include "RenderObject.h"
 #include <iostream>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -77,13 +78,13 @@ int main()
 
     // build and compile shaders
     // -------------------------
-    Shader ourShader("resources/shader/1.model_loading.vs", "resources/shader/1.model_loading.fs");
+    Material ourShader("resources/shader/1.model_loading.vs", "resources/shader/1.model_loading.fs");
 
     // load models
     // -----------
-    Model ourModel("resources/sz.obj");
+    MeshRenderer ourModel("resources/sz.obj");
 
-
+    RenderObject* targetTest = RenderObject::CreateRenderObject("resources/sz.obj", &ourShader);
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -106,23 +107,23 @@ int main()
         glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // don't forget to enable shader before setting uniforms
-        ourShader.use();
-
-        // view/projection transformations
-        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-        glm::mat4 view = camera.GetViewMatrix();
-        ourShader.setMat4("projection", projection);
-        ourShader.setMat4("view", view);
-
-        // render the loaded model
-        glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
-        ourShader.setMat4("model", model);
-        ourModel.Draw(ourShader);
+       
+        //äÖÈ¾Ö÷Ñ­»·
 
 
+
+
+        /////
+
+
+
+
+
+
+
+
+
+        RenderObject::DrawAll(camera);
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
         glfwSwapBuffers(window);

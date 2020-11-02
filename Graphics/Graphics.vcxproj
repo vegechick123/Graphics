@@ -144,10 +144,26 @@
   <ItemGroup>
     <ClCompile Include="D:\Downloads\glad\src\glad.c" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="RenderObject.cpp" />
+    <ClCompile Include="Render\LightSource.cpp" />
+    <ClCompile Include="render\Material.cpp" />
+    <ClCompile Include="Render\Mesh.cpp" />
+    <ClCompile Include="Render\MeshRenderer.cpp" />
+    <ClCompile Include="Render\Transform.cpp" />
     <ClCompile Include="std_imge.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Desktop\shader.h" />
+    <ClInclude Include="RenderObject.h" />
+    <ClInclude Include="Render\LightSource.h" />
+    <ClInclude Include="render\Material.h" />
+    <ClInclude Include="Render\Mesh.h" />
+    <ClInclude Include="Render\MeshRenderer.h" />
+    <ClInclude Include="Render\Transform.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\shader\1.model_loading.fs" />
+    <None Include="resources\shader\1.model_loading.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
