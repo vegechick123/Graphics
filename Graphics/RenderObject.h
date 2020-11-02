@@ -9,13 +9,13 @@ class RenderObject
 	static std::list<RenderObject*> list;
 public:
 	Transform transform;
-	MeshRenderer renderer;
+	MeshRenderer* renderer;
 	Material* material;
-	static RenderObject* CreateRenderObject(string const& meshPath, Material* material, bool gamma = false);
+	static RenderObject* CreateRenderObject(MeshRenderer* meshRenderer, Material* _material);
 	static void DrawAll(Camera camera);
 	void DestoryRenderObject(RenderObject* target);
 private:
-	RenderObject(string const& meshPath, Material* material, bool gamma = false);
+	RenderObject(MeshRenderer* meshRenderer, Material* _material);
 	~RenderObject();
 };
 

@@ -10,6 +10,7 @@
 #include "Render\Material.h"
 #include "Render\Transform.h"
 #include "RenderObject.h"
+#include "Render\PointLight.h"
 #include <iostream>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -83,8 +84,23 @@ int main()
     // load models
     // -----------
     MeshRenderer ourModel("resources/sz.obj");
+    MeshRenderer sphere("resources/sphere.obj");
+    RenderObject* targetTest = RenderObject::CreateRenderObject(&sphere, &ourShader);
+    //targetTest->transform.scale = vec3(0.1, 0.1, 0.1);
+    //targetTest->transform.position.y = 1;
+    Pointlight* light0 = Pointlight::CreateLight();
+    light0->transform.position = vec3(1, 0.5, 1);
+    Pointlight* light1 = Pointlight::CreateLight();
+    light1->transform.position = vec3(-1, 0.5, -1);
 
-    RenderObject* targetTest = RenderObject::CreateRenderObject("resources/sz.obj", &ourShader);
+    RenderObject* lightSphere0 = RenderObject::CreateRenderObject(&sphere, &ourShader);
+    lightSphere0->transform = light0->transform;
+    lightSphere0->transform.scale = vec3(0.1, 0.1, 0.1);
+
+    RenderObject* lightSphere1 = RenderObject::CreateRenderObject(&sphere, &ourShader);
+    lightSphere1->transform = light1->transform;
+    lightSphere1->transform.scale = vec3(0.1, 0.1, 0.1);
+
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 

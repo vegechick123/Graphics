@@ -149,6 +149,7 @@
     <ClCompile Include="render\Material.cpp" />
     <ClCompile Include="Render\Mesh.cpp" />
     <ClCompile Include="Render\MeshRenderer.cpp" />
+    <ClCompile Include="Render\PointLight.cpp" />
     <ClCompile Include="Render\Transform.cpp" />
     <ClCompile Include="std_imge.cpp" />
   </ItemGroup>
@@ -159,6 +160,7 @@
     <ClInclude Include="render\Material.h" />
     <ClInclude Include="Render\Mesh.h" />
     <ClInclude Include="Render\MeshRenderer.h" />
+    <ClInclude Include="Render\PointLight.h" />
     <ClInclude Include="Render\Transform.h" />
   </ItemGroup>
   <ItemGroup>

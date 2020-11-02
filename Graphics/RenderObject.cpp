@@ -2,10 +2,11 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include "Render\PointLight.h"
 std::list<RenderObject*> RenderObject::list;
-RenderObject* RenderObject::CreateRenderObject(string const& meshPath, Material* material,bool gamma)
+RenderObject* RenderObject::CreateRenderObject(MeshRenderer* meshRenderer, Material* _material)
 {
-	RenderObject* result = new RenderObject(meshPath, material,gamma);
+	RenderObject* result = new RenderObject(meshRenderer, _material);
 	list.push_back(result);
 	return result;
 }
@@ -23,12 +24,15 @@ void RenderObject::DrawAll(Camera camera)
 		renderObject->material->setMat4("projection", projection);
 		renderObject->material->setMat4("view", view);
 		renderObject->material->setMat4("model", model);
-		renderObject->renderer.Draw(*(renderObject->material));
+
+		Pointlight::ApplyAllLight(renderObject->material);
+		renderObject->renderer->Draw(*(renderObject->material));
 	}
 }
 
-RenderObject::RenderObject(string const& meshPath, Material* _material, bool gamma):renderer(meshPath, gamma)
+RenderObject::RenderObject(MeshRenderer* meshRenderer, Material* _material)
 {
+	renderer = meshRenderer;
 	material = _material;
 }
 RenderObject::~RenderObject()

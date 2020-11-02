@@ -7,7 +7,7 @@ mat4 Transform::getModelMatrix()
 	model = glm::rotate(model, rotation.x, vec3(1, 0, 0));
 	model = glm::rotate(model, rotation.y, vec3(0, 1, 0));
 	model = glm::rotate(model, rotation.z, vec3(0, 0, 1));
-	model = glm::scale(model, vec3(1.0f, 1.0f, 1.0f));
+	model = glm::scale(model, scale);
 	return model;
 }
 
