@@ -7,6 +7,7 @@ using glm::mat4;
 class Transform
 {
 public :
+	Transform* parent;
 	vec3 position;
 	vec3 rotation;
 	vec3 scale;

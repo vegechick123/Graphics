@@ -11,6 +11,7 @@
 #include "Render\Transform.h"
 #include "RenderObject.h"
 #include "Render\PointLight.h"
+#include "Render\DirectionLight.h"
 #include <iostream>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -21,7 +22,7 @@ void processInput(GLFWwindow* window);
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
-
+const int potLightNum = 4;
 // camera
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 float lastX = SCR_WIDTH / 2.0f;
@@ -77,30 +78,35 @@ int main()
     // -----------------------------
     glEnable(GL_DEPTH_TEST);
 
-    // build and compile shaders
+    // build and compile shader
     // -------------------------
-    Material ourShader("resources/shader/1.model_loading.vs", "resources/shader/1.model_loading.fs");
+    Material ourShader("resources/shader/1.model_loading.vert", "resources/shader/1.model_loading.frag");
 
     // load models
     // -----------
-    MeshRenderer ourModel("resources/sz.obj");
+    //MeshRenderer ourModel("resources/sz.obj");
     MeshRenderer sphere("resources/sphere.obj");
     RenderObject* targetTest = RenderObject::CreateRenderObject(&sphere, &ourShader);
     //targetTest->transform.scale = vec3(0.1, 0.1, 0.1);
     //targetTest->transform.position.y = 1;
-    Pointlight* light0 = Pointlight::CreateLight();
-    light0->transform.position = vec3(1, 0.5, 1);
-    Pointlight* light1 = Pointlight::CreateLight();
-    light1->transform.position = vec3(-1, 0.5, -1);
+    Pointlight* lights[potLightNum];
+    DirectionLight* dirlight=DirectionLight::CreateLight();
+    //dirlight->color = vec3(1, 0, 0);
+    for (int i = 0; i < potLightNum; i++)
+    {
+        lights[i]= Pointlight::CreateLight();
+        RenderObject* lightSphere = RenderObject::CreateRenderObject(&sphere, &ourShader);
+        lightSphere->transform.scale = vec3(0.1, 0.1, 0.1);
+        lightSphere->transform.parent = &lights[i]->transform;
+    }
+    lights[0]->color = vec3(1, 0, 0);
+    lights[1]->color = vec3(0, 1, 0);
+    lights[2]->color = vec3(0, 0, 1);
+    lights[3]->color = vec3(1, 1, 1);
+    lights[3]->transform.position = vec3(0, -1.5, 0);
 
-    RenderObject* lightSphere0 = RenderObject::CreateRenderObject(&sphere, &ourShader);
-    lightSphere0->transform = light0->transform;
-    lightSphere0->transform.scale = vec3(0.1, 0.1, 0.1);
-
-    RenderObject* lightSphere1 = RenderObject::CreateRenderObject(&sphere, &ourShader);
-    lightSphere1->transform = light1->transform;
-    lightSphere1->transform.scale = vec3(0.1, 0.1, 0.1);
-
+    //targetTest->transform.scale = vec3(0.1, 0.1, 0.1);
+    //targetTest->transform.position.y = 1;
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -125,9 +131,11 @@ int main()
 
        
         //äÖÈ¾Ö÷Ñ­»·
-
-
-
+        for (int i = 0; i < 3; i++)
+        {
+            float cnt = currentFrame+3.1415926*i*2/3;
+            lights[i]->transform.position = vec3(2*sin(cnt), 0, 2*cos(cnt));
+        }
 
         /////
 

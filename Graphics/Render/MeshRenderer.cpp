@@ -108,7 +108,6 @@ Mesh MeshRenderer::processMesh(aiMesh* mesh, const aiScene* scene)
     // diffuse: texture_diffuseN
     // specular: texture_specularN
     // normal: texture_normalN
-
     // 1. diffuse maps
     vector<Texture> diffuseMaps = loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
     textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());

@@ -8,7 +8,10 @@ mat4 Transform::getModelMatrix()
 	model = glm::rotate(model, rotation.y, vec3(0, 1, 0));
 	model = glm::rotate(model, rotation.z, vec3(0, 0, 1));
 	model = glm::scale(model, scale);
-	return model;
+	if (parent == nullptr)
+		return model;
+	else
+		return parent->getModelMatrix() * model;
 }
 
 Transform::Transform(vec3 position, vec3 rotation, vec3 scale)
@@ -16,4 +19,5 @@ Transform::Transform(vec3 position, vec3 rotation, vec3 scale)
 	this->position = position;
 	this->rotation = rotation;
 	this->scale = scale;
+	parent = nullptr;
 }

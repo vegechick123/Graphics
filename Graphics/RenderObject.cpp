@@ -3,6 +3,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "Render\PointLight.h"
+#include "Render\DirectionLight.h"
 std::list<RenderObject*> RenderObject::list;
 RenderObject* RenderObject::CreateRenderObject(MeshRenderer* meshRenderer, Material* _material)
 {
@@ -20,12 +21,14 @@ void RenderObject::DrawAll(Camera camera)
 	{
 		renderObject->material->use();
 		glm::mat4 model= renderObject->transform.getModelMatrix();
-
+		renderObject->material->setVec3("viewPos", camera.Position);
 		renderObject->material->setMat4("projection", projection);
 		renderObject->material->setMat4("view", view);
 		renderObject->material->setMat4("model", model);
 
+		DirectionLight::ApplyAllLight(renderObject->material);
 		Pointlight::ApplyAllLight(renderObject->material);
+
 		renderObject->renderer->Draw(*(renderObject->material));
 	}
 }

@@ -145,6 +145,7 @@
     <ClCompile Include="D:\Downloads\glad\src\glad.c" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="RenderObject.cpp" />
+    <ClCompile Include="Render\DirectionLight.cpp" />
     <ClCompile Include="Render\LightSource.cpp" />
     <ClCompile Include="render\Material.cpp" />
     <ClCompile Include="Render\Mesh.cpp" />
@@ -156,6 +157,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Desktop\shader.h" />
     <ClInclude Include="RenderObject.h" />
+    <ClInclude Include="Render\DirectionLight.h" />
     <ClInclude Include="Render\LightSource.h" />
     <ClInclude Include="render\Material.h" />
     <ClInclude Include="Render\Mesh.h" />
@@ -164,8 +166,8 @@
     <ClInclude Include="Render\Transform.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="resources\shader\1.model_loading.fs" />
-    <None Include="resources\shader\1.model_loading.vs" />
+    <None Include="resources\shader\1.model_loading.frag" />
+    <None Include="resources\shader\1.model_loading.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

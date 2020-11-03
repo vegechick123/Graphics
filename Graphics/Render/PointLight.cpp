@@ -2,9 +2,12 @@
 #include <string>
 Pointlight::Pointlight()
 {
-	constant = 1;
-	linear = 1;
-	quadratic = 1;
+	/*constant = 100;
+	linear = 100;
+	quadratic = 100;*/
+	constant = 0.01;
+	linear = 0.1;
+	quadratic = 0.1;
 }
 
 Pointlight::~Pointlight()

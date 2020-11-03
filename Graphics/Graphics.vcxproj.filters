@@ -45,6 +45,9 @@
     <ClCompile Include="Render\PointLight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Render\DirectionLight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Desktop\shader.h">
@@ -71,12 +74,15 @@
     <ClInclude Include="Render\PointLight.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Render\DirectionLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="resources\shader\1.model_loading.fs">
+    <None Include="resources\shader\1.model_loading.frag">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="resources\shader\1.model_loading.vs">
+    <None Include="resources\shader\1.model_loading.vert">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
