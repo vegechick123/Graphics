@@ -24,7 +24,8 @@ uniform int lightNum;
 uniform vec3 viewPos;
 uniform sampler2D texture_diffuse1;
 uniform sampler2D texture_normal1;
-
+uniform sampler2D texture_roughness1;
+uniform sampler2D texture_metallic1;
 const float PI = 3.14159265359;
 vec3 CalcPointLight(PointLight light,vec3 fragPos)
 {
@@ -83,8 +84,8 @@ void main()
     vec3 albedo = texture(texture_diffuse1, TexCoords).xyz;
     vec3 normal = texture(texture_normal1, TexCoords).rgb;
     vec3 ambient =vec3(0.2,0.2,0.2);
-    float metallic=1;
-    float roughness=0.4;
+    float metallic=texture(texture_metallic1, TexCoords).r;
+    float roughness=texture(texture_roughness1, TexCoords).r;
     vec3 F0 = vec3(0.04);
     F0 = mix(F0, albedo.rgb, metallic);
     normal = normalize(normal * 2.0 - 1.0);   
@@ -128,7 +129,7 @@ void main()
         float NdotL = max(dot(normal, -lightDir), 0.0);     
         finalcolor += (kD*albedo.rgb/PI+ specular)*lightCol*NdotL;//1 *CalcPointLight(pointLights[i],fragPos)*albedo;
     }
-    FragColor = vec4(finalcolor,1);
+    FragColor = vec4(finalcolor.rgb,1);
     //FragColor = vec4(fragPos,1);
     //FragColor = texture(texture_diffuse1, TexCoords);
 }

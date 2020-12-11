@@ -22,7 +22,7 @@ void processInput(GLFWwindow* window);
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
-const int potLightNum = 4;
+const int potLightNum = 3;
 // camera
 Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 float lastX = SCR_WIDTH / 2.0f;
@@ -91,6 +91,7 @@ int main()
     //targetTest->transform.position.y = 1;
     Pointlight* lights[potLightNum];
     DirectionLight* dirlight=DirectionLight::CreateLight();
+    dirlight->intensity = 1;
     //dirlight->color = vec3(1, 0, 0);
     for (int i = 0; i < potLightNum; i++)
     {
@@ -102,11 +103,10 @@ int main()
     lights[0]->color = vec3(1, 0, 0);
     lights[1]->color = vec3(0, 1, 0);
     lights[2]->color = vec3(0, 0, 1);
-    lights[3]->color = vec3(1, 1, 1);
-    lights[3]->transform.position = vec3(0, -1.5, 0);
 
-    //targetTest->transform.scale = vec3(0.1, 0.1, 0.1);
-    //targetTest->transform.position.y = 1;
+    lights[0]->transform.position = vec3(2, -0.5, -0.5);
+    lights[1]->transform.position = vec3(0, 2, 0);
+    lights[2]->transform.position = vec3(0, 0, 2);
     // draw in wireframe
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
