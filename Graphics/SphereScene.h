@@ -14,7 +14,9 @@
 #include "RenderObject.h"
 #include "Render\PointLight.h"
 #include "Render\DirectionLight.h"
+#include "Animation.h"
 
+#include <algorithm>
 #include <vector>
 #include <iostream>
 class SphereScene : public Scene {
@@ -34,8 +36,6 @@ public:
 		//MeshRenderer ourModel("resources/sz.obj");
 		MeshRenderer *sphere=new MeshRenderer("resources/sphere.obj");
 		RenderObject* targetTest = RenderObject::CreateRenderObject(sphere, ourShader);
-		//targetTest->transform.scale = vec3(0.1, 0.1, 0.1);
-		//targetTest->transform.position.y = 1;
 		lights = new Pointlight*[potLightNum];
 		//Pointlight* lights[potLightNum];
 		DirectionLight* dirlight = DirectionLight::CreateLight();
@@ -44,18 +44,35 @@ public:
 		for (int i = 0; i < potLightNum; i++)
 		{
 			lights[i] = Pointlight::CreateLight();
+			lights[i]->transform.parent = &targetTest->transform;
 			RenderObject* lightSphere = RenderObject::CreateRenderObject(sphere, ourShader);
 			lightSphere->transform.scale = vec3(0.1, 0.1, 0.1);
 			lightSphere->transform.parent = &lights[i]->transform;
 		}
+		
 		lights[0]->color = vec3(1, 0, 0);
 		lights[1]->color = vec3(0, 1, 0);
 		lights[2]->color = vec3(0, 0, 1);
+		vec3(*circleFunc)(float) = [](float t) {return vec3(2 * sin(t), 0, 2 * cos(t)); };
+		animations = new vector<Animation<vec3>*>;
+		for (int i = 0; i < 3; i++)
+		{
+			Animation<vec3>* t = new Animation<vec3>(circleFunc, &(lights[i]->transform.position));
+			t->Play(3.1415926 * i * 2 / 3);
+			animations->push_back(t);
+			
+		}
+		Animation<vec3>* EnterPositionAnimation = new Animation<vec3>([](float t) {
+			return vec3(0,0,-5+0.3f*t); }, & (targetTest->transform.position));
+		EnterPositionAnimation->Play();
+		animations->push_back(EnterPositionAnimation);
 
-		lights[0]->transform.position = vec3(2, -0.5, -0.5);
-		lights[1]->transform.position = vec3(0, 2, 0);
-		lights[2]->transform.position = vec3(0, 0, 2);
-	}
+		Animation<vec3>* EnterRotationAnimation = new Animation<vec3>([](float t) {
+			return vec3(0, 0.3f*t,0); }, &(targetTest->transform.rotation));
+		EnterRotationAnimation->Play();
+		animations->push_back(EnterRotationAnimation);
+
+	};
 
 	virtual void doCallBackFuncs(double xpos, double ypos) override {
 		static bool firstMouse = true;
@@ -103,12 +120,9 @@ public:
 		// -----
 		this->doProcessInput(this->getWindow());
 
-
-		//äÖÈ¾Ö÷Ñ­»·
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < animations->size(); i++)
 		{
-			float cnt = currentFrame + 3.1415926*i * 2 / 3;
-			lights[i]->transform.position = vec3(2 * sin(cnt), 0, 2 * cos(cnt));
+			(*animations)[i]->Update(deltaTime);
 		}
 		cout << "Drawing\n";
 		RenderObject::DrawAll(camera);
@@ -118,4 +132,5 @@ private:
 	Camera camera;
 	Pointlight** lights;
 	float deltaTime;
+	vector<Animation<vec3>*>* animations;
 };

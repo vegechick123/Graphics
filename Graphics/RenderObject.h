@@ -3,7 +3,7 @@
 #include "Render\MeshRenderer.h"
 #include "learnopengl\camera.h"
 #include <list>
-#include<vector>
+#include <vector>
 class RenderObject
 {
 	static std::list<RenderObject*> list;

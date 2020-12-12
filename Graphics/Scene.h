@@ -7,6 +7,7 @@ typedef void mouse_callback(double , double);
 typedef void draw_func();
 class Scene {
 public:
+
 	Scene() {}
 	Scene(GLFWwindow* window) :window(window) {}
 	virtual void doCallBackFuncs(double x, double y) = 0;

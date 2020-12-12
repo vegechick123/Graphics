@@ -72,7 +72,7 @@ int main()
     // render loop
     // -----------
 	
-	SceneController::getInstance()->replaceScene(new SphereScene(window));
+	SceneController::getInstance()->replaceScene(new ButtonScene(window));
     while (!glfwWindowShouldClose(window))
     {
 

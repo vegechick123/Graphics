@@ -28,8 +28,8 @@ void RenderObject::DrawAll(Camera camera)
 
 		DirectionLight::ApplyAllLight(renderObject->material);
 		Pointlight::ApplyAllLight(renderObject->material);
-
-		renderObject->renderer->Draw(*(renderObject->material));
+		if(renderObject->renderer)
+			renderObject->renderer->Draw(*(renderObject->material));
 	}
 }
 
