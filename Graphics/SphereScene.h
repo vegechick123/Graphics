@@ -27,13 +27,13 @@ public:
 		glEnable(GL_DEPTH_TEST);
 		int potLightNum = 3;
 		camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
-		Material ourShader("resources/shader/1.model_loading.vert", "resources/shader/1.model_loading.frag");
+		Material *ourShader=new Material("resources/shader/1.model_loading.vert", "resources/shader/1.model_loading.frag");
 
 		// load models
 		// -----------
 		//MeshRenderer ourModel("resources/sz.obj");
-		MeshRenderer sphere("resources/sphere.obj");
-		RenderObject* targetTest = RenderObject::CreateRenderObject(&sphere, &ourShader);
+		MeshRenderer *sphere=new MeshRenderer("resources/sphere.obj");
+		RenderObject* targetTest = RenderObject::CreateRenderObject(sphere, ourShader);
 		//targetTest->transform.scale = vec3(0.1, 0.1, 0.1);
 		//targetTest->transform.position.y = 1;
 		lights = new Pointlight*[potLightNum];
@@ -44,7 +44,7 @@ public:
 		for (int i = 0; i < potLightNum; i++)
 		{
 			lights[i] = Pointlight::CreateLight();
-			RenderObject* lightSphere = RenderObject::CreateRenderObject(&sphere, &ourShader);
+			RenderObject* lightSphere = RenderObject::CreateRenderObject(sphere, ourShader);
 			lightSphere->transform.scale = vec3(0.1, 0.1, 0.1);
 			lightSphere->transform.parent = &lights[i]->transform;
 		}
