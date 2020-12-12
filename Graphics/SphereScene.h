@@ -110,7 +110,7 @@ public:
 			float cnt = currentFrame + 3.1415926*i * 2 / 3;
 			lights[i]->transform.position = vec3(2 * sin(cnt), 0, 2 * cos(cnt));
 		}
-		cout << "Drawing\n";
+		// cout << "Drawing\n";
 		RenderObject::DrawAll(camera);
 
 	}

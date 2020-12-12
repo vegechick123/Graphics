@@ -56,21 +56,6 @@ int main()
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
-
-    // tell stb_image.h to flip loaded texture's on the y-axis (before loading model).
-
-    // configure global opengl state
-    // -----------------------------
-    //glEnable(GL_DEPTH_TEST);
-
-    // build and compile shader
-    // -------------------------
-
-    // draw in wireframe
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-    // render loop
-    // -----------
 	
 	SceneController::getInstance()->replaceScene(new SphereScene(window));
     while (!glfwWindowShouldClose(window))
