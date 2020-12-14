@@ -1,4 +1,4 @@
-#include "SceneController.h"
+  #include "SceneController.h"
 
 void SceneController::Do() {
 	if(now != nullptr)

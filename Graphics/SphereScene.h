@@ -28,7 +28,7 @@ public:
 		int potLightNum = 3;
 		camera = Camera(glm::vec3(0.0f, 0.0f, 3.0f));
 		Material *ourShader=new Material("resources/shader/1.model_loading.vert", "resources/shader/1.model_loading.frag");
-
+		 
 		// load models
 		// -----------
 		//MeshRenderer ourModel("resources/sz.obj");

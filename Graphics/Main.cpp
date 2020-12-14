@@ -57,7 +57,7 @@ int main()
         return -1;
     }
 	
-	SceneController::getInstance()->replaceScene(new SphereScene(window));
+	SceneController::getInstance()->replaceScene(new ButtonScene(window));
     while (!glfwWindowShouldClose(window))
     {
 
