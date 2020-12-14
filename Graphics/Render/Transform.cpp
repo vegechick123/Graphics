@@ -14,6 +14,14 @@ mat4 Transform::getModelMatrix()
 		return parent->getModelMatrix() * model;
 }
 
+vec3 Transform::getWorldPosition()
+{
+	if (parent == nullptr)
+		return position;
+	else
+		return parent->getModelMatrix() * vec4(position,1);
+}
+
 Transform::Transform(vec3 position, vec3 rotation, vec3 scale)
 {
 	this->position = position;

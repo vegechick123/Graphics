@@ -1,5 +1,6 @@
 #include"PointLight.h"
 #include <string>
+#include<iostream>
 Pointlight::Pointlight()
 {
 	/*constant = 100;
@@ -21,7 +22,7 @@ void Pointlight::SetMaterialLight(Material* material, int index)
 	t += "pointLights[";
 	t += '0' + index;
 	t += "].";
-	material->setVec3(t + "position",transform.position);
+	material->setVec3(t + "position",transform.getWorldPosition());
 	material->setVec3(t + "color", color);
 	material->setFloat(t + "constant", constant);
 	material->setFloat(t + "linear", linear);
